@@ -1,53 +1,63 @@
+// C# program to illustrate how to
+// remove elements from the stack
 using System;
+using System.Collections;
 using System.Linq; 
-
-namespace Method {
-
-  class Program {   
-
-    // method declaration
-    static int SmallestNum() {
-      int[] A = {-1,-3};
-      Array.Sort(A);
-      //A.Distinct().ToArray();
-      int[] newA = A.Distinct().ToArray();
-      
-      int LowestNum = 0;
-      string Done = "false";
-      int i = 1; 
-      //for(int i = 1; i < newA.Length; i++)
-      while(Done == "false")
-        {   
-            //int status = newA[i-1].CompareTo(i);
-            bool num = A.Contains(i);
-            
-            if(num == true)
-            {
-                
-                LowestNum = LowestNum + 1; 
-            }
-            else
-            {
-                LowestNum = i;
-                Done = "true";
-            }
-            i++;
-            //Console.WriteLine(status);
-            //Console.WriteLine(i);
-            //Console.WriteLine(newA[i]);
+using System.Collections.Generic; 
+ 
+class solution{
+ 
+    // Main Method
+    static public void Main()
+    {
+ 
+        // Create a stack
+        // Using Stack class
+       
+        Stack<int> my_stack = new Stack<int>();
+        int[] A = {-3,1,6,4,-2,8};
+        Array.Sort(A);
+        int[] newA = A.Distinct().ToArray();
+        // Adding elements in the Stack
+        // Using Push method
+        for(int i = 0; i < newA.Length; i++)
+        {
+             my_stack.Push(newA[i]);
+             //Console.WriteLine(newA[i]);
         }
-      return LowestNum;
-      
+        int LowestNum = 0;
+        int current, next; 
+        int count = my_stack.Count; 
+        
+        while(count > 1 || LowestNum == 1 )
+        {
+            
+             current = my_stack.Pop();
+             next = my_stack.Peek();
+             Console.WriteLine("Pop: {0} ", current);
+             Console.WriteLine("Peek: {0} ", next); 
+             if(current > (next + 1) && next != 1)
+             {
+                 LowestNum = next + 1; 
+                 
+             }
+             /*else if (current == next && next != 1)
+             {
+                 LowestNum = next; 
+                 
+             }*/
+             
+             else
+             {
+                 LowestNum = 2; 
+             }
+             Console.WriteLine("LowestNum: {0} ", LowestNum); 
+             count--;
+             
+        }
+        Console.WriteLine("LowestNum: {0} ", LowestNum); 
+        
+        
+                                                    
     }
-
-    static void Main(string[] args) {
-
-      // call method 
-      int LowestNum = SmallestNum();
-
-      Console.WriteLine(LowestNum);
-      Console.ReadLine();
-     
-    }
-  }
 }
