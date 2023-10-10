@@ -15,17 +15,19 @@ class solution{
         // Using Stack class
        
         Stack<int> my_stack = new Stack<int>();
-        int[] A = {-3,1,6,4,-2,8};
+        //int[] A = {-3,1,6,4,-2,8};
+        int[] A = {-3,-1,-6,-4,-2,-8};
         Array.Sort(A);
         int[] newA = A.Distinct().ToArray();
+         
         // Adding elements in the Stack
         // Using Push method
         for(int i = 0; i < newA.Length; i++)
         {
              my_stack.Push(newA[i]);
-             //Console.WriteLine(newA[i]);
+             Console.WriteLine(newA[i]);
         }
-        int LowestNum = 0;
+        int LowestNum = 1;
         int current, next; 
         int count = my_stack.Count; 
         
@@ -36,16 +38,21 @@ class solution{
              next = my_stack.Peek();
              Console.WriteLine("Pop: {0} ", current);
              Console.WriteLine("Peek: {0} ", next); 
-             if(current > (next + 1) && next != 1)
+             if(LowestNum <= 0 || current <= 0 )
+             {
+                 LowestNum = 1; 
+                 break;
+             }
+             else if(current > (next + 1) && next != 1)
              {
                  LowestNum = next + 1; 
                  
              }
-             /*else if (current == next && next != 1)
+             else if (current == (next-1) && next != 1)
              {
                  LowestNum = next; 
                  
-             }*/
+             }
              
              else
              {
